@@ -2,21 +2,23 @@
 
 ## VBA (Visual Basic for Applications)
 
-### get and store value of a cell:
-
+#### get and store value of a cell:
+```vbnet
 Dim cell_value As String
 cell_value = Sheets("Sheet1").Range("A1")
+```
 
-### wrap text on/off
+#### wrap text on/off
 
 http://software-solutions-online.com/excel-vba-wrap-text-onoff/
 
-### clear content of the selected range:
-
+#### clear content of the selected range:
+```vbnet
 Sheets("Sheet1").Range("A1:A10000").ClearContents
+```
 
-### yes/no message box:
-
+#### yes/no message box:
+```vbnet
 Dim YesOrNoAnswerToMessageBox As String
 Dim QuestionToMessageBox As String
 
@@ -30,13 +32,15 @@ Else 'ElseIf YesOrNoAnswerToMessageBox = vbNo Then
 	'#######    false execution   #######
 End
 End If
+```
 
-### to stop execution of the macro:
-
+#### to stop execution of the macro:
+```vbnet
 Exit Sub
+```
 
-### while loop to the column:
-
+#### while loop to the column:
+```vbnet
 Dim rowcount As Integer
 Dim generatedScriptOne As String
 generatedScriptOne = "begin transaction " _
@@ -54,9 +58,11 @@ Loop
 generatedScriptOne = generatedScriptOne & " --rollback " _
 									& " --commit "
 Sheets("Sheet1").Range("B1") = generatedScriptOne
+```
+
 
 ### while loop to the row:
-
+```vbnet
 'Clear generated script before generating new:
 Sheets("Sheet1").Range("B1:AAA1").ClearContents
 
@@ -73,10 +79,10 @@ Do While Sheets("Sheet1").Range("B1").Offset(0, rowcount) <> ""
 	rowcount = rowcount + 1
 Loop
 '################  END OF THE LOOP  ###############
+```
 
-
-### group box:
-
+#### group box:
+```vbnet
 Sub GroupBox9_Click()
 End Sub
 
@@ -102,3 +108,4 @@ Sub Action_Button_Click()
 	
 	Sheets("Sheet1").Range("D20") = output1
 End Sub
+```
