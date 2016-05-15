@@ -1,31 +1,31 @@
 # mysql
 
-## to select database
+#### to select database
 
 ```sql
 use `database_name`;
 ```
 
-## to see all the tables under the selected database:
+#### to see all the tables under the selected database:
 
 ```sql
 show tables;
 ```
 
-## search for the specific table:
-
+#### search for the specific table:
+```sql
 select table_name
 from information_schema.tables 
 where table_name like '%table_name%'
 order by table_name desc;
+```
 
-
-## select IF condition
-
+#### select IF condition
+```sql
 IF(`gender` = 'Male', 'M','F') as 'gender',
-
-## select CASE condition
-
+```
+#### select CASE condition
+```sql
 CASE
 	WHEN `category_id` = 'category_1' THEN 'Category_001'
 	WHEN`category_id` = 'category_2' THEN 'Category_002'
@@ -33,9 +33,10 @@ CASE
 	WHEN `category_id` = 'category_4' THEN 100 * (select param_3 from table_name where param_1  = value_1 and param_2 = value_2)
 	ELSE ''
 END as 'Category ID',
+```
 
-## INSERT statement addition, in case we have an existing record:
-
+#### INSERT statement addition, in case we have an existing record:
+```sql
  ON DUPLICATE KEY
     UPDATE `table_name`.column_name=`table_name`.column_name;
-
+```

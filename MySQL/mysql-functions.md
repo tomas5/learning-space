@@ -2,6 +2,7 @@
 
 ## functions
 
+```sql
 -- to check if function with the specified name already exists in the database:
 -- SHOW FUNCTION STATUS where name = 'getPensionablePay';
 
@@ -42,3 +43,4 @@ BEGIN
 	END IF;
 END$$
 DELIMITER
+```
