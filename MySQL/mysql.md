@@ -2,11 +2,15 @@
 
 ## to select database
 
+```sql
 use `database_name`;
+```
 
 ## to see all the tables under the selected database:
 
+```sql
 show tables;
+```
 
 ## search for the specific table:
 
