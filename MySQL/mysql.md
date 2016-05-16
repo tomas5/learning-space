@@ -10,6 +10,18 @@ use `database_name`;
 
 ```sql
 show tables;
+
+SHOW TABLES LIKE '%table_name%';
+```
+
+#### to see what database you are running
+```sql
+SELECT DATABASE();
+```
+
+#### to see what user you are running
+```sql
+SELECT USER();
 ```
 
 #### search for the specific table:
@@ -35,8 +47,9 @@ CASE
 END as 'Category ID',
 ```
 
-#### INSERT statement addition, in case we have an existing record:
+#### check for duplicates
 ```sql
- ON DUPLICATE KEY
-    UPDATE `table_name`.column_name=`table_name`.column_name;
+SELECT * from table_name group by parameter_name_one , parameter_name_two having count(*) > 1
+
+SELECT count(*), table_name.* from table_name group by parameter_name_one , parameter_name_two having count(*) > 1
 ```
