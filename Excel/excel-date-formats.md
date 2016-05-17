@@ -31,3 +31,9 @@ months = the number of months before or after start_date. A positive value for m
 ```vbnet
 =IF(NOT(ISERROR(DATEVALUE(TEXT(J3,"mm/dd/yyyy")))),"Valid date","Invalid date")
 ```
+#### convert dateformat from '31122016' to '2016-12-31
+/* https://support.office.com/en-gb/article/Split-text-among-columns-by-using-functions-389f665d-ec1a-4271-9c5a-c35280be795d
+*/
+```vbnet
+=CLEAN("'" & RIGHT(G2, 4)  & "-" & MID(G2, 3, 2) &  "-" & LEFT(G2, 2 ) & "'")
+```

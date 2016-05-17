@@ -27,3 +27,8 @@
 ```vbnet
 =IF((COUNTIF('Sheet1'!$A:$A,B1)=0), NOT(ISBLANK(B1)))
 ```
+
+#### IF statement with multi-condition:
+```vbnet
+=IF(AND(AND(A2=B2, C2="Delta"), AND(B2=0, NOT(C2=0))), "Positive", "Negative")
+```
