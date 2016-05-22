@@ -44,3 +44,24 @@ IF EXISTS(SELECT * from table_name)
 ELSE
 	PRINT 'Negative'
 ```
+
+#### using a common table expression (CTE) | locating duplicates
+```sql
+select * from table_name
+
+WITH cte AS (
+  SELECT param_1, param_2, param_3,  -- *, 
+     row_number() OVER(PARTITION BY param_3, param_4 ORDER BY (select NULL)) AS RowOrder
+  FROM table_name
+  WHERE param_5 NOT IN ('001', '002') -- Except some of the values
+)
+select * from cte WHERE RowOrder > 1
+--delete from cte WHERE RowOrder > 1
+
+select * FROM table_name where param_1 = 'id_of_duplicate'
+```
+
+
+
+
+
