@@ -17,6 +17,11 @@ http://software-solutions-online.com/excel-vba-wrap-text-onoff/
 Sheets("Sheet1").Range("A1:A10000").ClearContents
 ```
 
+#### clear content (formatting and values) of the selected sheet:
+```vbnet
+Sheets("Sheet1").Cells.Clear
+```
+
 #### yes/no message box:
 ```vbnet
 Dim YesOrNoAnswerToMessageBox As String

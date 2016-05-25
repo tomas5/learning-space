@@ -32,3 +32,4 @@
 ```vbnet
 =IF(AND(AND(A2=B2, C2="Delta"), AND(B2=0, NOT(C2=0))), "Positive", "Negative")
 ```
+
