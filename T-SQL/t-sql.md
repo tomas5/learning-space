@@ -30,11 +30,16 @@ begin tran
 -- commit
 ```
 
-#### check transaction status
+#### check transaction status (returned value indicates the total number of the open transactions)
 ```sql
 select @@TRANCOUNT
+```
 
+#### check transaction status (advanced)
+```sql
 dbcc opentran
+-- to check the user who has open transaction:
+sp_who2
 ```
 
 #### select IF condition
@@ -61,7 +66,16 @@ select * from cte WHERE RowOrder > 1
 select * FROM table_name where param_1 = 'id_of_duplicate'
 ```
 
-
-
-
+#### create sequence - partition each record (rows) with the incremented number
+```sql
+CREATE SEQUENCE sequence_name AS int
+START WITH 1 -- start with 1
+INCREMENT BY 1
+--  INCREMENT BY -1 -- counts into negative numbers by one every time
+MINVALUE 1 -- start again from 1 
+MAXVALUE 10 -- after it reaches 10
+CYCLE -- repeat until it assigns partition number for each record in the table_name table 
+UPDATE table_name SET param_1 = NEXT VALUE FOR sequence_name
+DROP SEQUENCE sequence_name
+```
 
