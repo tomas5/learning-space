@@ -1,10 +1,12 @@
 # excel
 
-#### to get a value from the specified sheet and cell ($ =  a fixed cell reference, $ sign shortcut:  F4):
+#### to get a value from the specified sheet and cell ($ =  a fixed cell reference; $ sign shortcut:  F4):
 
 ```vbnet
 =Sheet1!$A$1
 ```
+
+NOTE: you may use the single quotes for sheet name, for example ='Sheet 2'!$A$1
 
 #### copy text without begin and end quotes:
 ```vbnet

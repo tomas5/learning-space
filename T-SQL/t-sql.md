@@ -6,12 +6,12 @@
 select * from sys.tables
 ```
 
-#### to see the table parameters and specifications:
+##### to see the table parameters and specifications:
 ```sql
 sp_help 'table_name'
 ```
 
-#### pull out data from two different tables into one single SELECT
+##### pull out data from two different tables into one single SELECT
 
 ```sql
 Select t1.B1 as 'Column One', t2.B2 as 'Column Two'
@@ -20,7 +20,7 @@ From
 (select param_2 as B2 from table_name_two where param_3 = 1) as t2
 ```
 
-#### to start transaction
+##### to start transaction
 ```sql
 begin transaction
 -- OR
@@ -30,19 +30,19 @@ begin tran
 -- commit
 ```
 
-#### check transaction status (returned value indicates the total number of the open transactions)
+##### check transaction status (returned value indicates the total number of the open transactions)
 ```sql
 select @@TRANCOUNT
 ```
 
-#### check transaction status (advanced)
+##### check transaction status (advanced)
 ```sql
 dbcc opentran
 -- to check the user who has open transaction:
 sp_who2
 ```
 
-#### select IF condition
+##### select IF condition
 ```sql
 IF EXISTS(SELECT * from table_name)
 	PRINT 'Positive'
@@ -50,7 +50,7 @@ ELSE
 	PRINT 'Negative'
 ```
 
-#### using a common table expression (CTE) | locating duplicates
+##### using a common table expression (CTE) | locating duplicates
 ```sql
 select * from table_name
 
@@ -66,7 +66,7 @@ select * from cte WHERE RowOrder > 1
 select * FROM table_name where param_1 = 'id_of_duplicate'
 ```
 
-#### create sequence - partition each record (rows) with the incremented number
+##### create sequence - partition each record (rows) with the incremented number
 ```sql
 CREATE SEQUENCE sequence_name AS int
 START WITH 1 -- start with 1
