@@ -15,7 +15,10 @@ NOTE: you may use the single quotes for sheet name, for example ='Sheet 2'!$A$1
 =CLEAN( "SELECT * FROM table WHERE id LIKE '%" & A1 & "%'" )
 
 =CLEAN( "UNION ALL SELECT * FROM table WHERE id = '" & A1 & "' " )
+
+=CLEAN("SELECT * FROM table WHERE id = "&IF(A1="","NULL","'"&A1&"'"))
 ```
+
 #### to select every second row (using the modulo function: MOD)
 ```vbnet
 =MOD(ROW(A1),2)

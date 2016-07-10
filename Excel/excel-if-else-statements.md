@@ -31,5 +31,9 @@
 #### IF statement with multi-condition:
 ```vbnet
 =IF(AND(AND(A2=B2, C2="Delta"), AND(B2=0, NOT(C2=0))), "Positive", "Negative")
+
+=IF(OR(A1="", B1 ="",C1="",D1="",E1=""), "Empty cells", "Not empty cells")
+
+=IF(OR(A1<>"", B1 <>"",C1<>"",D1<>"",E1<>""), "Selected range contains some values", "this IF condition is incorrect to determine the output message")
 ```
 

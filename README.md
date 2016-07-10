@@ -1,3 +1,3 @@
 # learning-space
 
-The space of my little projects.
+The space of learning & more
