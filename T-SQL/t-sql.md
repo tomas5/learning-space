@@ -1,5 +1,11 @@
 # T-SQL (Transact-SQL)
 
+##### SSMS tools
+
+[ Red Gate Software](https://www.red-gate.com/products/?gclid=CIGg1fvV680CFUSVGwodzCUJzA)
+
+[ApexSQL](http://www.apexsql.com/Download.aspx)
+
 ##### populate all databases
 
 ```sql
