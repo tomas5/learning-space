@@ -10,7 +10,7 @@ cell_value = Sheets("Sheet1").Range("A1")
 
 #### wrap text on/off
 
-http://software-solutions-online.com/excel-vba-wrap-text-onoff/
+[Excel VBA, Wrap Text On/Off](http://software-solutions-online.com/excel-vba-wrap-text-onoff/)
 
 #### clear content of the selected range:
 ```vbnet
@@ -113,4 +113,12 @@ Sub Action_Button_Click()
 	
 	Sheets("Sheet1").Range("D20") = output1
 End Sub
+```
+
+#### replace function
+```vbnet
+'replace empty (blank) cells with value of: NULL
+Worksheets("Table1").Columns("A").Replace _
+What:=" ", Replacement:="NULL", _
+SearchOrder:=xlByColumns, MatchCase:=True
 ```

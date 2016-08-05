@@ -2,6 +2,13 @@
 
 ## CAST and CONVERT
 
+##### replace string with integer
+```sql
+declare @string nvarchar(25)
+set @string = 'hello_word1'
+select cast(REPLACE(@string,'hello_word','') as integer) as 'Converted Value'
+```
+
 ##### if value is NULL set to a different value (note: only applies to the same data type)
 
 ```sql
