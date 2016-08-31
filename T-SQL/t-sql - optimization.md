@@ -67,6 +67,14 @@ When UPDLOCK is specified, the READCOMMITTED and READCOMMITTEDLOCK isolation lev
 
 
 
+#### to evaluate existing and potential clustered and non-cluestered indexes that will improve performance
+
+[Tutorial: Database Engine Tuning Advisor](https://msdn.microsoft.com/en-us/library/ms166575.aspx)
+Use the Database Engine Tuning Advisor.
+Database Engine Tuning Advisor examines how queries are processed in the databases you specify, and then recommends how you can improve query processing performance by modifying database structures such as indexes, indexed views, and partitioning.
+
+
+
 
 
 

@@ -37,3 +37,7 @@
 =IF(OR(A1<>"", B1 <>"",C1<>"",D1<>"",E1<>""), "Selected range contains some values", "this IF condition is incorrect to determine the output message")
 ```
 
+
+#### IF statement with multi-condition:
+
+=IF(F2=F1, (IF(CONCATENATE(G2,H2)=CONCATENATE(G1,H1), "true", "false")), "-")

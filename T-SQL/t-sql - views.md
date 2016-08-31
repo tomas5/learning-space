@@ -7,15 +7,67 @@ Views can help reduce complexity and improve access control.
 Views can help maintain database (DB) integrity (e.g. by doing updates via views)
 Data integrity by it means, aims to prevent unintentional changes to information.
 
+#### sp_refreshview 
+
+(sp_refreshview)[https://msdn.microsoft.com/en-us/library/ms187821.aspx]
+If a view is not created with the SCHEMABINDING clause, sp_refreshview should be run when changes are made to the objects underlying the view that affect the definition of the view.
+
 
 #### view and trigger
-##### Problem: how to allow users to modify data by using the view created from the multiple tables
+##### Problem: how to allow users to modify data (only specified parameters of a table) by using the view created from the table
 ##### Solution: create an INSTEAD OF trigger on the view
 [Transact-SQL CREATE VIEW](https://msdn.microsoft.com/en-us/library/ms187956.aspx)
 [Designing INSTEAD OF Triggers](https://technet.microsoft.com/en-us/library/ms175521.aspx)
+[INSTEAD OF INSERT Triggers](https://technet.microsoft.com/en-us/library/ms175089(v=sql.105).aspx)
 
 ```sql
+CREATE TABLE BaseTable
+(
+	ID 		int PRIMARY KEY IDENTITY(1,1),
+	Color 		nvarchar(10) NOT NULL,
+	Material 	nvarchar(10) NOT NULL,
+	ComputedCol 	AS (Color + Material)
+);
+GO
 
+--Create a view that contains all columns from the base table.
+CREATE VIEW InsteadView
+AS 
+SELECT ID, Color, Material, ComputedCol
+-- or specify asterisk for all columns ("*")
+-- SELECT *
+FROM BaseTable;
+GO
+
+--Create an INSTEAD OF INSERT trigger on the view.
+CREATE TRIGGER InsteadTrigger on InsteadView
+INSTEAD OF INSERT
+AS
+BEGIN
+  --Build an INSERT statement ignoring inserted.ID and inserted.ComputedCol
+  INSERT INTO BaseTable
+       SELECT Color, Material
+       FROM inserted
+END;
+GO
+
+--A correct INSERT statement that skips the ID and ComputedCol columns.
+INSERT INTO BaseTable (Color, Material)
+       VALUES (N'Red', N'Cloth');
+
+--View the results of the INSERT statement.
+SELECT * FROM BaseTable;
+
+--A correct INSERT statement supplying dummy values for the PrimaryKey and ComputedCol columns.
+INSERT INTO InsteadView (ID, Color, Material, ComputedCol)
+       VALUES (999, N'Blue', N'Plastic', N'XXXXXX')
+
+--However, we can ignore dummy values because ID and ComputedCol columns are automatically assigned:
+INSERT INTO InsteadView (Color, Material)
+      VALUES ('Blue', N'Plastic')
+
+--View the results of the INSERT statement.
+SELECT * FROM InsteadView;
 ```
 
 #### To improve the performance of the view by persisting data to disk can be achieved by

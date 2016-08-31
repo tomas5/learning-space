@@ -6,6 +6,36 @@
 
 [ApexSQL](http://www.apexsql.com/Download.aspx)
 
+##### object delimiters
+
+[Delimited Identifiers](https://technet.microsoft.com/en-us/library/ms176027)
+
+Means using double quotation marks (" ") or brackets ([ ]) to delimit objects/identifiers 
+
+```sql
+select * from "table name with blanks"
+-- OR:
+select * from [table name with blanks]
+
+/* 
+ * Another example by using reserved keywords (of the Transact-SQL language),
+ * where the identifiers must be delimited every time we are accessing the objects.
+ */
+
+create table [from] ( [select] nvarchar(25) ); 
+GO
+select [select] from [from] 
+GO
+```
+
+SELECT * FROM "Blanks in Table Name"
+
+##### select only unique parameter values (excluding duplicates):
+
+```sql
+SELECT DISTINCT parameter FROM table_name
+```
+
 ##### populate all databases
 
 ```sql
@@ -71,27 +101,6 @@ OR
 Select (select param_1 as B1 from table_name where param_2 = value_1)  as 'Column One', (select param_2 as B2 from table_name_two where param_3 = value_2) as 'Column Two'
 ```
 
-###### to start transaction
-```sql
-begin transaction
--- OR
-begin tran
-
--- rollback
--- commit
-```
-
-###### check transaction status (returned value indicates the total number of the opened transactions)
-```sql
-select @@TRANCOUNT
-```
-
-###### check transaction status (advanced)
-```sql
-dbcc opentran
--- to check the user who has open transaction:
-sp_who2
-```
 
 ###### select IF condition
 ```sql
@@ -130,3 +139,13 @@ UPDATE table_name SET param_1 = NEXT VALUE FOR sequence_name
 DROP SEQUENCE sequence_name
 ```
 
+
+###### return parameter if not null otherwise return other parameter
+[COALESCE -TSQL](https://msdn.microsoft.com/en-GB/library/ms190349.aspx)
+
+```sql
+select coalesce(t1.param1, t2.param2) as 'column title'
+from table_one as t1
+join table_two as t2 on (t2.ID = t1.ID)
+where
+```
