@@ -33,3 +33,16 @@ Temporary tables cannot be used in UDF	| SP allows temporary tables
 Non-deterministic functions cannot	| Non-deterministic functions can be 
 be used in UDFs. For example,		| used in stored procedures.
 GETDATE() cannot be used in UDFs.	|
+
+
+
+## stored procedure
+
+to locate all the stored procedures in the current database - you may use shortcut Alt+F1 which will call command:
+```sql
+sp_help
+```
+print created stored procedure in the Results:
+```sql
+sp_helptext 'stored_procedure_name'
+```

@@ -1,12 +1,12 @@
 # T-SQL (Transact-SQL)
 
-##### SSMS tools
+## SSMS tools
 
 [ Red Gate Software](https://www.red-gate.com/products/?gclid=CIGg1fvV680CFUSVGwodzCUJzA)
 
 [ApexSQL](http://www.apexsql.com/Download.aspx)
 
-##### object delimiters
+## object delimiters
 
 [Delimited Identifiers](https://technet.microsoft.com/en-us/library/ms176027)
 
@@ -30,25 +30,36 @@ GO
 
 SELECT * FROM "Blanks in Table Name"
 
-##### select only unique parameter values (excluding duplicates):
+## select only unique parameter values (excluding duplicates):
 
 ```sql
 SELECT DISTINCT parameter FROM table_name
 ```
 
-##### populate all databases
+## populate all databases
 
 ```sql
 select * from sys.databases
 ```
 
-##### populate all tables under database
+## populate all tables under database
 
 ```sql
 select * from sys.tables
 ```
 
-##### locate schema names within table names
+## use two-part names to reference the table.
+```sql
+-- this is an example only, in real life we would not use two-part names
+--  only for a single table - it would apply if we would be joining tables
+select table_name.parameter_one, table_name.parameter_two
+from table_name
+-- OR:
+select t.parameter_one, t.parameter_two
+from table_name as t
+```
+
+## locate schema names within table names
 ```sql
 select s.name as 'Scheme name', t.name as 'Table name'
 from sys.tables as t
@@ -56,39 +67,61 @@ join sys.schemas as s
 	on t.schema_id = s.schema_id
 ```
 
-###### to see the table parameters and specifications:
+### to see the table parameters and specifications:
 ```sql
 sp_help 'table_name'
 ```
 
-##### percentage vs underscore 
+## search object by keyword
+```sql
+select * from table_name where param_name like '%keyword%'
+```
+
+### percentage vs underscore 
 percentage ("%") means match any sub-string of 0 or more characters
 underscore ("_") means match any one character 
 
-##### order by DESC vs ASC
+## order by DESC vs ASC
 
 DESC keyword means descending and ASC means ascending
  The ORDER BY keyword sorts the records in ascending (ASC) order by default. 
 
-##### drop vs delete
+## drop vs delete
 ```sql
-DROP TABLE table_name -- completely removing a table
+DROP TABLE table_name -- completely removing a table: all data, indexes, triggers, constraints, and permission specifications for that table
 ```
 ```sql
 DELETE FROM table_name -- deleting all rows of a table
 ```
- 
-##### entity integrity
+
+## drop vs trancate
+
+```sql
+TRUNCATE table_name
+/*
+ * Removes all rows from a table without logging the individual row deletions.
+ * Sets the row count zero.
+ * TRUNCATE TABLE is similar to the DELETE statement with no WHERE clause.
+ * If we have large table, we may truncate it, then drop it. This way the data will be nixed without record, and the table can be dropped,
+ * and that drop will be very inexpensive because no data needs to be recorded.
+ * Truncate will reset the identity value but delete does not.
+ * For the DELETE we would need to run the following command:
+ *  DBCC CHECKIDENT (table_name, RESEED, 0)
+ * You cannot truncate tables that are referenced by a foreign key constraint
+ */
+```
+
+## entity integrity
  
 entity integrity = primary keys
 For example, if a table has a primary key then table exhibit entity integrity because each parameter_one (let's considerer as ID) value is unique and there are no NULLs. Where the unique value requirement prohibits a null primary key value, because nulls are not unique.
 
-##### referential integrity
+## referential integrity
 referential integrity = foreign keys
 For example, if a table has a foreign key then table exhibits referential integrity because each parameter_one value in table_one points to an existing parameter_two value in table_two.
 Foreign key value has a match in the corresponding table.
  
-###### pull out data from two different tables into one single SELECT
+### pull out data from two different tables into one single SELECT
 
 ```sql
 Select t1.B1 as 'Column One', t2.B2 as 'Column Two'
@@ -99,10 +132,18 @@ From
 OR
 ```sql
 Select (select param_1 as B1 from table_name where param_2 = value_1)  as 'Column One', (select param_2 as B2 from table_name_two where param_3 = value_2) as 'Column Two'
+OR
+```sql
+Select t1.B1 as 'Column One', t2.B2 as 'Column Two'
+From table_name_one as t1
+join table_name_two as t2
+	on 1=1 -- given that there are no primary/foreign key relationships
+where t1.param_2 = value_1 
+	and t2.param_3 = value_2
 ```
 
 
-###### select IF condition
+### select IF condition
 ```sql
 IF EXISTS(SELECT * from table_name)
 	PRINT 'Positive'
@@ -110,7 +151,7 @@ ELSE
 	PRINT 'Negative'
 ```
 
-###### using a common table expression (CTE) | locating duplicates
+### using a common table expression (CTE) | locating duplicates
 ```sql
 select * from table_name
 
@@ -126,7 +167,7 @@ select * from cte WHERE RowOrder > 1
 select * FROM table_name where param_1 = 'id_of_duplicate'
 ```
 
-###### create sequence - partition each record (rows) with the incremented number
+### create sequence - partition each record (rows) with the incremented number
 ```sql
 CREATE SEQUENCE sequence_name AS int
 START WITH 1 -- start with 1
@@ -140,7 +181,7 @@ DROP SEQUENCE sequence_name
 ```
 
 
-###### return parameter if not null otherwise return other parameter
+### return parameter if not null otherwise return other parameter
 [COALESCE -TSQL](https://msdn.microsoft.com/en-GB/library/ms190349.aspx)
 
 ```sql
