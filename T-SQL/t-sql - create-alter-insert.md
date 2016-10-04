@@ -29,6 +29,27 @@ ALTER TABLE table_name ADD param_6 AS param_2 + param_3
 ALTER TABLE table_name ADD param_7 AS (param_2 + param_3) PERSISTED
 ```
 
+## adding a computed column with the inserted value based on a user-defined function
+```sql
+create function function_name
+(@param1 numeric(9,2),
+@param2 numeric(9, 2))
+returns numeric(9, 2)
+with schemabinding -- supports an index
+as
+	begin
+		declare @param3 numeric(9,2)
+		select @param3 = case
+			when @param1 = 0 then 0
+			else @param1*@param2
+			end
+		return @param3
+	end
+go
+alter table table_name add param3 as function_name(param1, param2) persisted
+```
+
+
 ## insert data
 
 ```sql

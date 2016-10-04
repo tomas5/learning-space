@@ -79,7 +79,7 @@ select * from table_name where param_name like '%keyword%'
 
 ### percentage vs underscore 
 percentage ("%") means match any sub-string of 0 or more characters
-underscore ("_") means match any one character 
+underscore ("_") means match any one (single) character 
 
 ## order by DESC vs ASC
 

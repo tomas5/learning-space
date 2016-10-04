@@ -54,3 +54,24 @@ months = the number of months before or after start_date. A positive value for m
 ```vbnet
 =CLEAN("'" & RIGHT(G2, 4)  & "-" & MID(G2, 3, 2) &  "-" & LEFT(G2, 2 ) & "'")
 ```
+
+## keep zeros in the formula
+
+[Keep leading zeros in number codes](https://support.office.com/en-gb/article/Keep-leading-zeros-in-number-codes-1bf7b935-36e1-4985-842f-5dfa51f85fe7)
+
+A1 cell value: 00123 	
+```vbnet
+=TEXT(A1,"00000")
+```
+Output: 00123
+
+
+## get current age from birthday
+```vbnet
+=INT(YEARFRAC(A1,TODAY()))
+```
+age on specific date:
+```vbnet
+=INT(YEARFRAC(A1,DATE(2016,1,1)))
+```
+
