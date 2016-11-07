@@ -54,8 +54,20 @@ select EOMONTH (GETDATE())
 ```
 
 
+#### store files/documents/images in the database table which are accessible via Transact-SQL queries only
 
+```sql
+param_one VARBINARY(MAX)
+```
 
+#### store documents/images in the database table which are stored as files on the file system
 
+```sql
+VARBINARY(MAX) FILESTREAM NULL
+-- note: when a table contains a FILESTREAM column, each row must have a nonnull unique row ID
+```
 
+[FILESTREAM - SQL Server](https://msdn.microsoft.com/en-us/library/gg471497.aspx)
+
+(FileTables - SQL Server)[https://msdn.microsoft.com/en-us/library/ff929144.aspx]
 

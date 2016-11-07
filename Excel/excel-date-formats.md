@@ -40,6 +40,11 @@ months = the number of months before or after start_date. A positive value for m
 ```
 
 
+## get one day before specified date:
+```vbnet
+=TEXT( DATE(YEAR(A1), MONTH(A1), DAY(A1) - 1), "YYYY-MM-DD")
+```
+
 ## to validate date format:
 
 ```vbnet
@@ -54,6 +59,7 @@ months = the number of months before or after start_date. A positive value for m
 ```vbnet
 =CLEAN("'" & RIGHT(G2, 4)  & "-" & MID(G2, 3, 2) &  "-" & LEFT(G2, 2 ) & "'")
 ```
+
 
 ## keep zeros in the formula
 

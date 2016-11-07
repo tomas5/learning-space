@@ -48,6 +48,18 @@ select * from sys.databases
 select * from sys.tables
 ```
 
+## declare variable
+```sql
+declare @parameter_one varchar(10) = 'value_one';
+-- OR
+declare @parameter_one varchar(10)
+set @parameter_one  = 'value_one';
+-- OR
+declare @parameter_one varchar(10)
+select @parameter_one  = 'value_one';
+```
+
+
 ## use two-part names to reference the table.
 ```sql
 -- this is an example only, in real life we would not use two-part names
@@ -142,6 +154,35 @@ where t1.param_2 = value_1
 	and t2.param_3 = value_2
 ```
 
+### select two different values from the same table and same parameter/attribute
+
+```sql
+if OBJECT_ID('table_one') is not null
+	drop table table_one
+go
+create table table_one ( ID int not null primary key, gender nvarchar(1) null )
+insert table_one values (1, 'F'), (2, null), (3, 'M'), (4, 'F'), (5, 'F'), (6, null)
+select *
+from
+(select count(ID) as [No. of Females] from table_one where gender = 'F') as t1
+,
+(select count(ID) as [No. of Males] from table_one where gender = 'M') as t2
+
+-- alternatively:
+select t1.[No. of Females], t2.[No. of Males], t3.[Unknown]
+from
+(select count(ID) as [No. of Females] from table_one where gender = 'F') as t1
+,
+(select count(ID) as [No. of Males] from table_one where gender = 'M') as t2
+,
+(select count(ID) as [Unknown] from table_one where gender IS NULL) as t3
+
+-- by using - group by:
+select gender, count(ID) as [Total No.]
+from table_one
+group by gender
+
+```
 
 ### select IF condition
 ```sql

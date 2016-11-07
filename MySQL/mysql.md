@@ -32,6 +32,15 @@ where table_name like '%table_name%'
 order by table_name desc;
 ```
 
+#### search for the specific column:
+```sql
+select *
+from information_schema.columns
+where table_schema = 'your_database_name'
+and table_name = 'your_table_name'
+and column_name = 'your_column_name';
+```
+
 #### select IF condition
 ```sql
 IF(`gender` = 'Male', 'M','F') as 'gender',
